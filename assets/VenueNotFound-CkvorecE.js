@@ -1,1 +1,0 @@
-import{Et as e}from"./Section-CsNjtRCh.js";import{p as t}from"./index-C0YAECoi.js";var n=e();function r(){return(0,n.jsx)(t,{title:`Venue not found`,description:`This listing may have been removed. Browse the full catalogue instead.`})}export{r as t};

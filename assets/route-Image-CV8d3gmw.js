@@ -1,0 +1,1 @@
+import{Et as e,i as t,m as n}from"./route-Section-CsNjtRCh.js";var r=e();function i({className:e,alt:i=``,loading:a=`lazy`,...o}){return(0,r.jsx)(n,{asChild:!0,children:(0,r.jsx)(`img`,{alt:i,loading:a,className:t(`block h-full w-full object-cover`,e),...o})})}export{i as t};
