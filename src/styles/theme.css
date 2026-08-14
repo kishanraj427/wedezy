@@ -1,0 +1,179 @@
+/* ============================================================================
+   Wedezy design tokens — the single source of truth.
+
+   Two layers:
+     1. Palette   — raw values. Never referenced by a component.
+     2. Semantic  — what a value MEANS (surface, border, accent, fg-muted).
+                    Components only ever use this layer.
+
+   Changing the brand means editing the palette here and nothing else.
+   ============================================================================ */
+
+@theme {
+  /* ---------------------------------------------------------------- *
+   * 1. Palette
+   * ---------------------------------------------------------------- */
+
+  --color-brand-50: #fdf3f5;
+  --color-brand-100: #f9e9ec;
+  --color-brand-200: #f2ccd5;
+  --color-brand-400: #d8455f;
+  --color-brand-500: #c22a44;
+  --color-brand-600: #a11f38;
+  --color-brand-700: #86192e;
+
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-150: #f1eef0;
+  --color-neutral-200: #e8e6e9;
+  --color-neutral-300: #ddd8db;
+  --color-neutral-400: #c9c6cc;
+  --color-neutral-500: #9ca3af;
+  --color-neutral-600: #6b7280;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-900: #131316;
+
+  --color-positive-500: #059669;
+  --color-notice-500: #b45309;
+
+  /* Ink used for scrims and shadows, so opacity variants stay consistent. */
+  --color-shadow-rgb: 17 24 39;
+  --color-scrim-rgb: 10 10 14;
+
+  /* ---------------------------------------------------------------- *
+   * 2. Semantic colour
+   * ---------------------------------------------------------------- */
+
+  /* Backgrounds.
+     NOTE: Radix Themes reserves --color-background, --color-surface,
+     --color-panel*, --color-overlay and --color-transparent. Ours are named
+     around them so a Radix update can never silently repaint the app. */
+  --color-canvas: var(--color-neutral-50);
+  --color-canvas-sunken: var(--color-neutral-100);
+  --color-sheet: var(--color-neutral-0);
+  --color-sheet-muted: var(--color-neutral-150);
+  --color-sheet-sunken: var(--color-neutral-100);
+
+  /* Lines */
+  --color-border: var(--color-neutral-200);
+  --color-border-strong: var(--color-neutral-300);
+  --color-border-hover: var(--color-neutral-400);
+
+  /* Text */
+  --color-fg: var(--color-neutral-900);
+  --color-fg-strong-muted: var(--color-neutral-700);
+  --color-fg-muted: var(--color-neutral-600);
+  --color-fg-subtle: var(--color-neutral-500);
+  --color-fg-on-accent: var(--color-neutral-0);
+  --color-fg-on-scrim: var(--color-neutral-0);
+
+  /* Accent */
+  --color-accent: var(--color-brand-500);
+  --color-accent-hover: var(--color-brand-600);
+  --color-accent-active: var(--color-brand-700);
+  --color-accent-soft: var(--color-brand-100);
+  --color-accent-softer: var(--color-brand-50);
+  --color-accent-border: var(--color-brand-200);
+
+  /* Status */
+  --color-positive: var(--color-positive-500);
+  --color-notice: var(--color-notice-500);
+
+  /* ---------------------------------------------------------------- *
+   * 3. Typography scale
+   * ---------------------------------------------------------------- */
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --text-display: clamp(2.625rem, 6.4vw, 4.875rem);
+  --text-display--line-height: 1.06;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-h1: clamp(1.875rem, 4vw, 2.75rem);
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.02em;
+
+  --text-h2: clamp(1.75rem, 3vw, 2.375rem);
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.02em;
+
+  --text-h3: 1.375rem;
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.01em;
+
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.3;
+  --text-h4--letter-spacing: -0.01em;
+
+  --text-lead: 1.0625rem;
+  --text-lead--line-height: 1.55;
+
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.6;
+
+  --text-body-lg: 1rem;
+  --text-body-lg--line-height: 1.65;
+
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.4;
+
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.12em;
+
+  /* ---------------------------------------------------------------- *
+   * 4. Radii, shadows, layout
+   * ---------------------------------------------------------------- */
+
+  --radius-control: 0.75rem;
+  --radius-card: 1.25rem;
+  --radius-panel: 1.5rem;
+
+  --shadow-card: 0 10px 30px rgb(var(--color-shadow-rgb) / 0.1);
+  --shadow-raised: 0 16px 34px rgb(var(--color-shadow-rgb) / 0.12);
+  --shadow-float: 0 24px 60px rgb(var(--color-shadow-rgb) / 0.14);
+  --shadow-hero: 0 30px 70px rgb(0 0 0 / 0.35);
+  --shadow-pill: 0 4px 14px rgb(0 0 0 / 0.14);
+  --shadow-accent: 0 10px 24px rgb(194 42 68 / 0.32);
+  --shadow-header: 0 6px 24px rgb(var(--color-shadow-rgb) / 0.06);
+  --shadow-subtle: 0 4px 14px rgb(var(--color-shadow-rgb) / 0.05);
+
+  --container-page: 77.5rem;
+
+  --spacing-gutter: 1.5rem;
+  --spacing-section: 4rem;
+  --spacing-section-lg: 5.5rem;
+
+  /* ---------------------------------------------------------------- *
+   * 5. Motion
+   * ---------------------------------------------------------------- */
+
+  /* Emphasized (expo-out) lands ~90% of the change in the first quarter of its
+     duration. Right for something *arriving* — an entrance, a route morph.
+     Wrong under the pointer, where it reads as a snap followed by a crawl. */
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Standard: eases in and out. The curve for hover and state changes. */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* One duration ladder for the whole app — hover, navigation and entrances
+     all read from it, so nothing drifts out of step. */
+  --duration-fast: 110ms;
+  --duration-base: 170ms;
+  --duration-slow: 240ms;
+  --duration-slower: 340ms;
+  --duration-slowest: 450ms;
+
+  --animate-hero-zoom: hero-zoom 14s ease-out forwards;
+  --animate-card-in: card-in var(--duration-slow) var(--ease-emphasized) both;
+  --animate-toast-in: toast-in var(--duration-slow) var(--ease-emphasized) both;
+  --animate-step-in: step-in var(--duration-slow) var(--ease-emphasized) both;
+  --animate-pop: pop 0.34s var(--ease-spring);
+  --animate-check-draw: check-draw 0.55s ease-out 0.15s both;
+  --animate-ring-draw: ring-draw 0.5s ease-out both;
+  --animate-rise: rise var(--duration-slow) var(--ease-emphasized) both;
+}

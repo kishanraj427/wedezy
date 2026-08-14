@@ -1,0 +1,95 @@
+/* Named utilities for effects that would otherwise become arbitrary values
+   scattered through components. */
+
+/* ============================================================
+   Motion
+
+   One transition definition for interactive surfaces. It lists the
+   properties explicitly — `transition-all` also animates layout
+   properties, which is what makes hover states judder.
+   ============================================================ */
+/* NOTE: Tailwind v4 compiles `scale-*`, `translate-*` and `rotate-*` to the
+   individual CSS properties (`scale:`, `translate:`, `rotate:`), not to the
+   `transform` shorthand. A transition that only lists `transform` therefore
+   does nothing for them — they snap. Every list below names all four. */
+@utility transition-smooth {
+  transition-property:
+    color, background-color, border-color, box-shadow, opacity, transform, translate, scale, rotate;
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--ease-standard);
+}
+
+@utility transition-smooth-fast {
+  transition-property:
+    color, background-color, border-color, box-shadow, opacity, transform, translate, scale, rotate;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+/**
+ * Surfaces that rise and gain a shadow on hover. A shadow spreading is a
+ * bigger visual change than a colour swap, so it needs longer to read as
+ * smooth — and `will-change` keeps the lift on its own compositor layer.
+ */
+@utility transition-lift {
+  transition-property: box-shadow, transform, translate, scale, background-color, border-color;
+  transition-duration: var(--duration-slow);
+  transition-timing-function: var(--ease-standard);
+  will-change: translate, box-shadow;
+}
+
+/**
+ * Zoom on a photo. Promoted to its own compositor layer so the scale never
+ * triggers a repaint.
+ */
+@utility media-zoom {
+  transition:
+    scale var(--duration-slow) var(--ease-standard),
+    translate var(--duration-slow) var(--ease-standard),
+    transform var(--duration-slow) var(--ease-standard);
+  will-change: scale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* ============================================================
+   Scrims
+   ============================================================ */
+@utility scrim-card {
+  background-image: linear-gradient(
+    to bottom,
+    transparent 45%,
+    rgb(var(--color-scrim-rgb) / 0.72) 100%
+  );
+}
+
+@utility scrim-media {
+  background-image: linear-gradient(to top, rgb(var(--color-scrim-rgb) / 0.7) 0%, transparent 100%);
+}
+
+@utility scrim-hero {
+  background-image: linear-gradient(
+    180deg,
+    rgb(20 8 10 / 0.34) 0%,
+    rgb(20 8 10 / 0.28) 45%,
+    rgb(20 8 10 / 0.5) 100%
+  );
+}
+
+@utility text-shadow-hero {
+  text-shadow: 0 4px 30px rgb(0 0 0 / 0.35);
+}
+
+/* Frosted app bar. */
+@utility surface-glass {
+  background-color: color-mix(in srgb, var(--color-canvas) 92%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

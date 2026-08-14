@@ -1,0 +1,21 @@
+/* ============================================================================
+   Cascade order matters more than specificity here.
+
+   Tailwind's preflight (`base`) resets `margin/padding: 0` on *every* element.
+   If it outranks Radix Themes, it silently strips the padding out of Radix
+   components — menu items, dialogs, popovers. So the order is:
+
+     theme → base (preflight) → components → radix-themes → utilities
+
+   Radix therefore beats the reset, and our utilities still beat Radix.
+   Our own token overrides live unlayered in base.css, above all of it.
+   ============================================================================ */
+@layer theme, base, components, radix-themes, utilities;
+
+@import 'tailwindcss';
+@import '@radix-ui/themes/styles.css' layer(radix-themes);
+
+@import './styles/theme.css';
+@import './styles/animations.css';
+@import './styles/base.css';
+@import './styles/utilities.css';

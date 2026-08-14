@@ -1,0 +1,93 @@
+/* Base element styling, Radix Themes bridging, view transitions, reduced motion. */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-canvas);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Unlayered on purpose: these feed our tokens into Radix Themes' own variables
+   and must outrank the radix-themes layer. */
+.radix-themes {
+  --default-font-family: var(--font-sans);
+  --heading-font-family: var(--font-sans);
+  --strong-font-family: var(--font-sans);
+  --em-font-family: var(--font-sans);
+  --code-font-family: var(--font-sans);
+  --focus-color: var(--color-accent);
+}
+
+/* Radix's `ghost` variant is built to sit inline inside a paragraph, so it
+   carries two behaviours we must undo:
+     • negative margins, so its text optically aligns with surrounding copy —
+       in a flex row that pulls neighbouring buttons into each other;
+     • box-sizing: content-box, so `w-full` + our own horizontal padding
+       overflows the container by exactly that padding.
+   We use ghost purely as an unpainted base and supply our own padding, so both
+   are neutralised here rather than patched per component.
+   `:where()` keeps specificity at 0, so a deliberate utility still wins. */
+.radix-themes :where(.rt-variant-ghost) {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   View transitions.
+
+   The morphing element must be the *rounded, clipping* box — a
+   snapshot of a bare <img> has square corners, which is what makes
+   a card→page transition pop from square to rounded on arrival.
+   ============================================================ */
+/* The card→page morph moves a large photo a long way, so it gets the slowest
+   timing in the app on the standard curve — the expo curve made it arrive
+   almost instantly and then settle, which reads as a snap, not a morph. */
+::view-transition-group(*) {
+  animation-duration: var(--duration-slower);
+  animation-timing-function: var(--ease-standard);
+}
+
+/* The page underneath crossfades a little quicker, so the morph leads. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--duration-base);
+  animation-timing-function: var(--ease-standard);
+}
+
+/* Keeps a morphing photo from squashing when the aspect ratio changes. */
+::view-transition-old(*),
+::view-transition-new(*) {
+  object-fit: cover;
+  overflow: clip;
+}
+
+/* ============================================================
+   Motion is an enhancement, never the mechanism.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
