@@ -18,6 +18,27 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- GitHub Pages SPA redirect receiver.
+         Pairs with public/404.html — decodes the path that was encoded into
+         the query string and restores it before React/Router initialises. -->
+    <script>
+      ;(function () {
+        var params = new URLSearchParams(window.location.search)
+        var p = params.get('p')
+        if (!p) return
+        var q = params.get('q')
+        params.delete('p')
+        params.delete('q')
+        var search =
+          (q ? '?' + q.replace(/~and~/g, '&') : '') +
+          (params.toString() ? (q ? '&' : '?') + params.toString() : '')
+        window.history.replaceState(
+          null,
+          null,
+          '/wedezy' + p + search + window.location.hash,
+        )
+      })()
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
