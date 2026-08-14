@@ -1,0 +1,1 @@
+import{Et as e}from"./Section-CsNjtRCh.js";import{p as t}from"./index-DHW-xZ3E.js";var n=e();function r(){return(0,n.jsx)(t,{title:`Page not found`,description:`We could not find that page.`})}var i=r;export{i as notFoundComponent};
