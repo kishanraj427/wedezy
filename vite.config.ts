@@ -18,6 +18,20 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // GitHub Pages (Jekyll) silently blocks any file whose name starts
+        // with an underscore. Rollup names route chunks after the route file,
+        // e.g. _venueId-xxx.js. Prefix every chunk with "route-" so the
+        // name never starts with "_".
+        chunkFileNames: (chunkInfo) => {
+          const name = chunkInfo.name.replace(/^_+/, '')
+          return `assets/route-${name}-[hash].js`
+        },
+      },
+    },
+  },
   experimental: {
     // Force all asset/chunk URLs to be absolute so that dynamically-imported
     // route chunks resolve correctly on nested GitHub Pages paths like
