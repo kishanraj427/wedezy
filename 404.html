@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wedezy</title>
+    <script>
+      // GitHub Pages SPA redirect trick.
+      // Any path that doesn't map to a real file lands here.
+      // We encode the full URL into the query string, redirect to the root
+      // index.html, and let the app's router restore the correct route.
+      var l = window.location
+      l.replace(
+        l.protocol +
+          '//' +
+          l.hostname +
+          (l.port ? ':' + l.port : '') +
+          l.pathname
+            .split('/')
+            .slice(0, 1 + 1) // keep the /wedezy/ segment
+            .join('/') +
+          '/?p=/' +
+          l.pathname.split('/').slice(2).join('/').replace(/&/g, '~and~') +
+          (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash,
+      )
+    </script>
+  </head>
+  <body></body>
+</html>

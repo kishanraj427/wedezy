@@ -1,1 +1,0 @@
-import{Et as e}from"./Section-CsNjtRCh.js";import{p as t}from"./index-C6qqISLG.js";var n=e();function r(){return(0,n.jsx)(t,{title:`Collection not found`,description:`That collection is no longer available. Browse all venues instead.`})}var i=r;export{i as notFoundComponent};

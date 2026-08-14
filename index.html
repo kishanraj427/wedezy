@@ -15,12 +15,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/600.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/700.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/fontsource/css/inter@latest/800.css" />
-    <script type="module" crossorigin src="/wedezy/assets/index-C6qqISLG.js"></script>
+    <script type="module" crossorigin src="/wedezy/assets/index-C0YAECoi.js"></script>
     <link rel="modulepreload" crossorigin href="/wedezy/assets/Section-CsNjtRCh.js">
     <link rel="modulepreload" crossorigin href="/wedezy/assets/queries-6wREMu7O.js">
     <link rel="stylesheet" crossorigin href="/wedezy/assets/index-Cyd4V2JB.css">
   </head>
   <body>
     <div id="root"></div>
+    <!-- GitHub Pages SPA redirect receiver.
+         Pairs with public/404.html — decodes the path that was encoded into
+         the query string and restores it before React/Router initialises. -->
+    <script>
+      ;(function () {
+        var params = new URLSearchParams(window.location.search)
+        var p = params.get('p')
+        if (!p) return
+        var q = params.get('q')
+        params.delete('p')
+        params.delete('q')
+        var search =
+          (q ? '?' + q.replace(/~and~/g, '&') : '') +
+          (params.toString() ? (q ? '&' : '?') + params.toString() : '')
+        window.history.replaceState(
+          null,
+          null,
+          '/wedezy' + p + search + window.location.hash,
+        )
+      })()
+    </script>
   </body>
 </html>
